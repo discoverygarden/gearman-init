@@ -21,18 +21,19 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 
 | Variable | Default | Description |
 | -------- | ------- | ----------- |
-| DRUPAL_ROOT | `/var/www/drupal7` | Path to Drupal's root installation directory, so we can call Drush in the correct context. |
-| DRUSH | The result of `which drush`. | Path of the `drush` executable. |
-| CPU_COUNT | The number of CPU cores present on the system. | Something of a misnomer? The number of worker processes to create. |
-| GEARMAN_HOST | The configured value from the "default" Drupal site. | The host/IP of the Gearman server. |
-| GEARMAN_PORT | The configured value from the "default" Drupal site. | The port to connect to on the Gearman server host. |
+| `DRUPAL_ROOT` | `/var/www/drupal7` | Path to Drupal's root installation directory, so we can call Drush in the correct context. |
+| `DRUSH` | The result of `which drush`. | Path of the `drush` executable. |
+| `CPU_COUNT` | The number of CPU cores present on the system. | Something of a misnomer? The number of worker processes to create. |
+| `GEARMAN_HOST` | The configured value from the "default" Drupal site. | The host/IP of the Gearman server. |
+| `GEARMAN_PORT` | The configured value from the "default" Drupal site. | The port to connect to on the Gearman server host. |
+| `GEARMAN_BIN` | The result of `which gearman`. | Path of the `gearman` CLI executable. |
 
 Copy/link the `gearman-workers.conf` and `gearman-worker.conf` files into `/etc/init`.
 
 The workers should start and stop automatically at boot/shutdown (currently following/preceding `mysql` of startup/shutdown; may be desirable to make into configuration at some point?).
 
 To start the workers immediately:
-`# start gearman-workers`
+```# start gearman-workers```
 
 ## Troubleshooting/Issues
 
