@@ -28,6 +28,13 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `GEARMAN_PORT` | The configured value from the "default" Drupal site. | The port to connect to on the Gearman server host. |
 | `GEARMAN_BIN` | The result of `which gearman`. | Path of the `gearman` CLI executable. |
 
+By default, workers will be started as the `www-data` user; if necessary to change:
+
+| Upstart version | Description | Example |
+| --- | --- | --- |
+| 1.3+ | Create an "[override file](http://upstart.ubuntu.com/cookbook/#override-files)" containing the `setuid` with the relevant user | `echo "setuid apache" >> /etc/init/gearman-worker.override` |
+| < 1.3 | Add the override to the end of the `*.conf` file. | `echo "setuid apache" >> /etc/init/gearman-worker.conf` |
+
 Copy/link the `gearman-workers.conf` and `gearman-worker.conf` files into `/etc/init`.
 
 The workers should start and stop automatically at boot/shutdown (currently following/preceding `mysql` of startup/shutdown; may be desirable to make into configuration at some point?).
