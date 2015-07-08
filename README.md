@@ -18,6 +18,7 @@ Clone/unzip into `/opt` such that we have:
 * `/opt/gearman-init/gearman-worker.sh`
 
 Provide any configuration necessary in `/etc/default/gearman-workers`:
+
 | Variable | Default | Description |
 | -------- | ------- | ----------- |
 | DRUPAL_ROOT | `/var/www/drupal7` | Path to Drupal's root installation directory, so we can call Drush in the correct context. |
