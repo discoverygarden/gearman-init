@@ -61,4 +61,4 @@ contact [discoverygarden](http://support.discoverygarden.ca).
 
 ## License
 
-[GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt)
+Contact discoverygarden if there are questions.
