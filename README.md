@@ -27,6 +27,7 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `GEARMAN_HOST` | The configured value from the "default" Drupal site. | The host/IP of the Gearman server. |
 | `GEARMAN_PORT` | The configured value from the "default" Drupal site. | The port to connect to on the Gearman server host. |
 | `GEARMAN_BIN` | The result of `which gearman`. | Path of the `gearman` CLI executable. |
+| `GEARMAN_USER` | `www-data` | The user as which to run Gearman workers. |
 
 By default, workers will be started as the `www-data` user; if necessary to change:
 
