@@ -29,7 +29,7 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `GEARMAN_BIN` | The result of `which gearman`. | Path of the `gearman` CLI executable. |
 | `GEARMAN_USER` | `www-data` | The user as which to run Gearman workers. |
 
-Copy/link the `gearman-workers.conf` and `gearman-worker.conf` files into `/etc/init`.
+Copy the `gearman-workers.conf` and `gearman-worker.conf` files into `/etc/init`.
 
 The workers should start and stop automatically at boot/shutdown (currently following/preceding `mysql` of startup/shutdown; may be desirable to make into configuration at some point?).
 
