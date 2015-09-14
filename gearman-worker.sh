@@ -3,7 +3,7 @@
 . /opt/gearman-init/gearman-defaults.sh
 
 # Get a Bash array containing a list of all the job names.
-if [ -z ${GEARMAN_FUNCTIONS+set} ]; then
+if [ -z ${GEARMAN_FUNCTIONS:+set} ]; then
   GEARMAN_FUNCTIONS=(`$DRUSH --root=$DRUPAL_ROOT php-eval --format=string "return implode('$IFS', array_keys(module_invoke_all('islandora_job_register_jobs')));"`)
   DRUSH_RETURN=$?
   if [ $DRUSH_RETURN -ne 0 ]; then
