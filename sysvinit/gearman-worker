@@ -1,0 +1,41 @@
+#gearman-worker
+#started by "gearman-workers" job
+
+### BEGIN INIT INFO
+# Provides: gearman-worker
+# Required-Start:    $local_fs $syslog $remote_fs dbus
+# Required-Stop:     $local_fs $syslog $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start gearman-worker
+### END INIT INFO
+
+start() {
+        echo "Starting gearman-worker..."
+        . /opt/gearman-init/gearman-defaults.sh
+        exec /bin/su --login --preserve-environment --shell /bin/sh --command "exec /opt/gearman-init/gearman-worker.sh" $GEARMAN_USER &
+        echo "Done."
+}
+
+stop() {
+        echo "Stopping gearman-worker..."
+        killall /usr/local/bin/gearman
+        echo "Done."
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload|condrestart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload}"
+        exit 1
+esac
+exit 0

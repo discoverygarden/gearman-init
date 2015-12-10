@@ -1,0 +1,40 @@
+# gearman-workers
+
+### BEGIN INIT INFO
+# Provides: gearman-workers
+# Required-Start:    $local_fs $syslog $remote_fs dbus
+# Required-Stop:     $local_fs $syslog $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start gearman-workers
+### END INIT INFO
+
+start() {
+        . /opt/gearman-init/gearman-defaults.sh
+        i=0
+        while [ $i -lt ${CPU_COUNT:-1} ]; do
+                /etc/init.d/gearman-worker start
+                i=$(($i + 1))
+        done
+}
+
+stop() {
+        /etc/init.d/gearman-worker stop
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload|condrestart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload}"
+        exit 1
+esac
+exit 0
