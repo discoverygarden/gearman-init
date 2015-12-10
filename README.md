@@ -45,7 +45,7 @@ Copy the `sysvinit/gearman-workers` and `sysvinit/gearman-worker` files into `/e
 Ensure permissions are 755
 
 To have the gearman workers start on system boot, run the following:
-/usr/sbin/update-rc.d gearman-workers defaults 99 20
+```# /usr/sbin/update-rc.d gearman-workers defaults 99 20```
 
 To start the workers immediately:
 ```# /etc/init.d/gearman-workers start```
