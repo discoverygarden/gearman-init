@@ -29,12 +29,26 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `GEARMAN_BIN` | The result of `which gearman`. | Path of the `gearman` CLI executable. |
 | `GEARMAN_USER` | `www-data` | The user as which to run Gearman workers. |
 
-Copy the `gearman-workers.conf` and `gearman-worker.conf` files into `/etc/init`.
+##UPSTART
+
+Copy the `upstart/gearman-workers.conf` and `upstart/gearman-worker.conf` files into `/etc/init`.
 
 The workers should start and stop automatically at boot/shutdown (currently following/preceding `mysql` of startup/shutdown; may be desirable to make into configuration at some point?).
 
 To start the workers immediately:
 ```# start gearman-workers```
+
+##SYSVINIT
+
+Copy the `sysvinit/gearman-workers` and `sysvinit/gearman-worker` files into `/etc/init.d`.
+Ensure permissions are 755
+
+
+To have the gearman workers start on system boot, run the following:
+/usr/sbin/update-rc.d gearman-workers defaults 99 20
+
+To start the workers immediately:
+```# /etc/init.d/gearman-workers start```
 
 ## Troubleshooting/Issues
 
