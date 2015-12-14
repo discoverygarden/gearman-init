@@ -50,6 +50,8 @@ To have the gearman workers start on system boot, run the following:
 To start the workers immediately:
 ```# /etc/init.d/gearman-workers start```
 
+Most options in the /etc/default/gearman-workers file has to be set, specially the path to binary ones as these are not available to the system at boot time.
+
 ## Note
 
 There is a bug in gearman that may cause issue if the listening host/IP doesn't match the worker connection host/IP, ensure these are the same. 
