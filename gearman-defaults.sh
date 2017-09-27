@@ -14,3 +14,4 @@ GEARMAN_HOST=${GEARMAN_HOST:-`$DRUSH --root=$DRUPAL_ROOT variable-get islandora_
 GEARMAN_PORT=${GEARMAN_PORT:-`$DRUSH --root=$DRUPAL_ROOT variable-get islandora_job_server_port --exact --format=string 2> /dev/null || echo -n '4730'`}
 GEARMAN_BIN=${GEARMAN_BIN:-`which gearman`}
 GEARMAN_USER=${GEARMAN_USER:-www-data}
+SITE_URI_LIST=${SITE_URI_LIST:-(http://localhost)}
