@@ -19,4 +19,4 @@ else
   GEARMAN_FUNCTIONS=${GEARMAN_FUNCTIONS[@]/#/-f }
 fi
 
-exec $GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w ${GEARMAN_FUNCTIONS} -- islandora-job-multisite-router.py
+exec $GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w ${GEARMAN_FUNCTIONS} -- $ROUTER
