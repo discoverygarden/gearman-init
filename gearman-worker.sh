@@ -7,7 +7,7 @@ if [ -z ${GEARMAN_FUNCTIONS:+set} ]; then
   GEARMAN_FUNCTIONS=""
   # XXX: STDOUT from Drush commands using @sites comes with an unfortunate
   # amount of unfriendly baggage; better to loop manually.
-  for site in ${SITE_URI_LIST[@]}; do
+  for site in $SITE_URI_LIST; do
     GEARMAN_FUNCTIONS="${GEARMAN_FUNCTIONS} `$DRUSH --root=$DRUPAL_ROOT --uri=$site islandora-job-list-functions --param_format`"
     DRUSH_RETURN=$?
     if [ $DRUSH_RETURN -ne 0 ]; then
