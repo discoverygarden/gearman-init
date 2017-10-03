@@ -17,4 +17,4 @@ GEARMAN_USER=${GEARMAN_USER:-www-data}
 # For multisites requiring per-site routing, a different router is provided
 # at https://github.com/discoverygarden/gearman-multisite-job-router
 ROUTER=${ROUTER:-"$DRUSH --root=$DRUPAL_ROOT -u 1 islandora-job-router"}
-SITE_URI_LIST=${SITE_URI_LIST:-`php -r "include 'php/get_sites.php'; gearman_init_get_sites('${DRUPAL_ROOT}', '${IFS}');"`}
+SITE_URI_LIST=${SITE_URI_LIST:-`$drush --root=$DRUPAL_ROOT @sites status --interactive --field-labels=0 --fields=uri | sed -z 's/\n//g'`}

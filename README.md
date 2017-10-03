@@ -29,7 +29,7 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `GEARMAN_BIN` | The result of `which gearman`. | Path of the `gearman` CLI executable. |
 | `GEARMAN_USER` | `www-data` | The user as which to run Gearman workers. |
 | `ROUTER` | The Drush command `islandora-job-router`, as user 1 and at `DRUPAL_ROOT`. | The routing command workers should send the Gearman payload to for processing. |
-| `SITE_URI_LIST` | The results of running `gearman_init_get_sites()` in `php/get_sites.php`, using `DRUPAL_ROOT` and the local `IFS`. | A bash array containing the list of sites to get worker functions for. |
+| `SITE_URI_LIST` | The "Site URI" portion of each entry in `drush @sites status` | A space-separated list of sites to get worker functions for. |
 
 ## upstart
 
