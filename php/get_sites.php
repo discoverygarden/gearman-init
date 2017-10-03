@@ -13,7 +13,7 @@
  */
 function gearman_init_get_sites($drupal_root = '/var/www/drupal7', $ifs = ' ') {
   require_once rtrim($drupal_root, '/') . '/sites/sites.php';
-  print_r(implode($ifs, $sites));
+  print_r(implode($ifs, array_merge($sites, array('default'))));
 }
 
 ?>

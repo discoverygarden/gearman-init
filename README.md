@@ -38,7 +38,9 @@ Copy the `upstart/gearman-workers.conf` and `upstart/gearman-worker.conf` files 
 The workers should start and stop automatically at boot/shutdown (currently following/preceding `mysql` of startup/shutdown; may be desirable to make into configuration at some point?).
 
 To start the workers immediately:
-```# start gearman-workers```
+```bash
+start gearman-workers
+```
 
 ## sysvinit
 
@@ -47,10 +49,14 @@ Copy the `sysvinit/gearman-workers` and `sysvinit/gearman-worker` files into `/e
 Ensure permissions are 755
 
 To have the gearman workers start on system boot, run the following:
-```# /usr/sbin/update-rc.d gearman-workers defaults 99 20```
+```bash
+/usr/sbin/update-rc.d gearman-workers defaults 99 20
+```
 
 To start the workers immediately:
-```# /etc/init.d/gearman-workers start```
+```bash
+/etc/init.d/gearman-workers start
+```
 
 Most options in the /etc/default/gearman-workers file has to be set, specially the path to binary ones as these are not available to the system at boot time.
 
