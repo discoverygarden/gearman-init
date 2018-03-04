@@ -1,0 +1,8 @@
+#gearman-worker jobs process, requires gearmand - DGI
+#Add another Requires per gearman worker.
+#To enable on bootup: systemctl enable gearman-worker@{1..n}.service
+
+[Unit]
+Description=Gearman Workers
+Requires=gearman-worker@1.service
+Requires=gearman-worker@2.service
