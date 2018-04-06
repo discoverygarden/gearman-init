@@ -57,6 +57,23 @@ To start the workers immediately:
 ```bash
 /etc/init.d/gearman-workers start
 ```
+## systemd
+
+Copy `systemd/*` files into /etc/systemd/system you may have to modify the `After=` in `gearmand.service` depending on how split out the stack is. 
+
+### Enable on boot
+where `n` is the total number of `Requires=` added to the `gearman-workers.target`
+
+```
+systemctl enable gearman-worker@{1..n}.service
+```
+
+### Status/start/stop
+```
+systemctl status gearman-workers.target
+systemctl start gearman-workers.target
+systemctl stop gearman-workers.target
+```
 
 Most options in the /etc/default/gearman-workers file has to be set, specially the path to binary ones as these are not available to the system at boot time.
 

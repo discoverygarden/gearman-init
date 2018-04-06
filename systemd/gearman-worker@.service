@@ -1,0 +1,14 @@
+#gearman-worker jobs process, requires gearmand - DGI
+[Unit]
+Description=Gearman Worker %i
+After=gearmand.service
+PartOf=gearman-workers.target
+
+[Service]
+WorkingDirectory=/opt/gearman-init
+User=apache
+ExecStart=/opt/gearman-init/gearman-worker.sh %i
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
