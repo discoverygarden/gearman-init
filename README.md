@@ -50,7 +50,10 @@ Ensure permissions are 755
 
 To have the gearman workers start on system boot, run the following:
 ```bash
+# UBUNTU:
 /usr/sbin/update-rc.d gearman-workers defaults 99 20
+# REDHAT:
+chkconfig --add gearman-workers
 ```
 
 To start the workers immediately:
