@@ -17,4 +17,4 @@ if [ -z ${GEARMAN_FUNCTIONS:+set} ]; then
   done
 fi
 
-exec $GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w ${GEARMAN_FUNCTIONS[@]/#/-f } -- $ROUTER
+exec $GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w $GEARMAN_FUNCTIONS -- $ROUTER
