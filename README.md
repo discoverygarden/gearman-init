@@ -30,6 +30,25 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `GEARMAN_USER` | `www-data` | The user as which to run Gearman workers. |
 | `ROUTER` | The Drush command `islandora-job-router`, as user 1 and at `DRUPAL_ROOT`. | The routing command workers should send the Gearman payload to for processing. |
 | `SITE_URI_LIST` | The "Site URI" portion of each entry in `drush @sites status` | A space-separated list of sites to get worker functions for. |
+| `CUSTOM_WORKER_FUCTIONS` | String of functions for a custom worker | formated as such: "-f function1 -f function2". Defaults to "-f default"   |
+
+## Custom Worker
+
+This is currently on compatible with upstart
+
+Copy `upstart/gearman-custom-worker.conf` files into `/etc/init`.
+
+Add your custom working functions to `/etc/default/gearman-workers` in the following format:
+```
+CUSTOM_WORKER_FUCTIONS="-f function1 -f function2 -f function3"
+```
+
+Ensure total number of workers does not exceed total number of CPU cores. May have to configure the `CPU_COUNT` var as well.
+
+stop gearman-workers
+start gearman-workers
+
+Your Custom worker should start with all the others.
 
 ## upstart
 
