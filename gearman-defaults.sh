@@ -18,3 +18,4 @@ GEARMAN_USER=${GEARMAN_USER:-www-data}
 # at https://github.com/discoverygarden/gearman-multisite-job-router
 ROUTER=${ROUTER:-"$DRUSH --root=$DRUPAL_ROOT -u 1 islandora-job-router"}
 SITE_URI_LIST=${SITE_URI_LIST:-$(for i in `find -L $DRUPAL_ROOT -name settings.php`; do basename `dirname $i`; done)}
+CUSTOM_WORKER_FUCTIONS=${CUSTOM_WORKER_FUCTIONS:-"-f default"}
