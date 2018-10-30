@@ -9,7 +9,7 @@
 
 DRUPAL_ROOT=${DRUPAL_ROOT:-/var/www/drupal7}
 DRUSH=${DRUSH:-`which drush`}
-CPU_COUNT=${CPU_COUNT:-$(expr `find /sys/devices/system/cpu -maxdepth 1 -type d -regex '.*/cpu[0-9]+$' | wc -l` / 2)}
+CPU_COUNT=${CPU_COUNT:-$(expr \( `find /sys/devices/system/cpu -maxdepth 1 -type d -regex '.*/cpu[0-9]+$' | wc -l` + 1 \) / 2)}
 GEARMAN_HOST=${GEARMAN_HOST:-`$DRUSH --root=$DRUPAL_ROOT variable-get islandora_job_server_host --exact --format=string 2> /dev/null || echo -n 'localhost'`}
 GEARMAN_PORT=${GEARMAN_PORT:-`$DRUSH --root=$DRUPAL_ROOT variable-get islandora_job_server_port --exact --format=string 2> /dev/null || echo -n '4730'`}
 GEARMAN_BIN=${GEARMAN_BIN:-`which gearman`}
