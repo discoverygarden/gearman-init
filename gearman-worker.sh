@@ -17,4 +17,11 @@ if [ -z ${GEARMAN_FUNCTIONS:+set} ]; then
   done
 fi
 
-exec $GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w ${GEARMAN_FUNCTIONS[@]/#/-f } -- $ROUTER
+TO_EXEC="$GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w ${GEARMAN_FUNCTIONS[@]/#/-f } -- $ROUTER"
+MAX_LENGTH=`getconf _POSIX_ARG_MAX`
+if [ ${#TO_EXEC} -gt $MAX_LENGTH ]; then
+  logger "Gearman worker argument length of ${#TO_EXEC} characters exceeds the maximum argument length of ${MAX_LENGTH}."
+  exit 1
+fi
+
+exec $TO_EXEC
