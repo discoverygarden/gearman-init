@@ -1,7 +1,7 @@
 #gearman-worker jobs process, requires gearmand - DGI
 [Unit]
 Description=Gearman Worker %i
-After=gearmand.service
+Requires=gearman-job-server.service
 PartOf=gearman-workers.target
 
 [Service]
