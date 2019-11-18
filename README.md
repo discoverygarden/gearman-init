@@ -67,6 +67,8 @@ Copy the `sysvinit/gearman-workers` and `sysvinit/gearman-worker` files into `/e
 
 Ensure permissions are 755
 
+If gearmand processes has a different name, the gearman-worker and gearman-workers files will need to be updated at `# Required-Start:`
+
 To have the gearman workers start on system boot, run the following:
 ```bash
 # UBUNTU:
