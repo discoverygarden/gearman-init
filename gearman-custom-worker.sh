@@ -8,7 +8,7 @@ if [ -z ${GEARMAN_FUNCTIONS:+set} ]; then
   # XXX: STDOUT from Drush commands using @sites comes with an unfortunate
   # amount of unfriendly baggage; better to loop manually.
   for site in $SITE_URI_LIST; do
-    GEARMAN_FUNCTIONS+=(`$DRUSH --root=$DRUPAL_ROOT --uri=$site islandora-job-list-functions`)
+    GEARMAN_FUNCTIONS=$CUSTOM_WORKER_FUCTIONS
     DRUSH_RETURN=$?
     if [ $DRUSH_RETURN -ne 0 ]; then
       logger "Could not determine worker functions."
@@ -17,11 +17,4 @@ if [ -z ${GEARMAN_FUNCTIONS:+set} ]; then
   done
 fi
 
-TO_EXEC="$GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w ${GEARMAN_FUNCTIONS[@]/#/-f } -- $ROUTER"
-MAX_LENGTH=`getconf _POSIX_ARG_MAX`
-if [ ${#TO_EXEC} -gt $MAX_LENGTH ]; then
-  logger "Gearman worker argument length of ${#TO_EXEC} characters exceeds the maximum argument length of ${MAX_LENGTH}."
-  exit 1
-fi
-
-exec $TO_EXEC
+exec $GEARMAN_BIN -v -h $GEARMAN_HOST -p $GEARMAN_PORT -w $GEARMAN_FUNCTIONS -- $ROUTER

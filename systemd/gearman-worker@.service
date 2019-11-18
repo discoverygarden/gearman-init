@@ -1,10 +1,11 @@
 #gearman-worker jobs process, requires gearmand - DGI
 [Unit]
 Description=Gearman Worker %i
-After=gearmand.service
+Requires=gearman-job-server.service
 PartOf=gearman-workers.target
 
 [Service]
+Environment=OMP_THREAD_LIMIT=1
 WorkingDirectory=/opt/gearman-init
 User=apache
 ExecStart=/opt/gearman-init/gearman-worker.sh %i
