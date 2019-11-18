@@ -2,7 +2,7 @@
 
 ### BEGIN INIT INFO
 # Provides: gearman-workers
-# Required-Start:    $local_fs $syslog $remote_fs dbus
+# Required-Start:    $local_fs $syslog $remote_fs dbus gearmand
 # Required-Stop:     $local_fs $syslog $remote_fs
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
