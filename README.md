@@ -141,7 +141,7 @@ Requires=gearman-custom-worker@2.service
 Just like the standard workers above, we have to enable or disable what we want to start with systemctl
 
 ```
-systemctl enable Requires=gearman-custom-worker@{1..2}.service
+systemctl enable gearman-custom-worker@{1..2}.service
 ```
 
 Start your workers
