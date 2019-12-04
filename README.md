@@ -32,24 +32,6 @@ Provide any configuration necessary in `/etc/default/gearman-workers`:
 | `SITE_URI_LIST` | The "Site URI" portion of each entry in `drush @sites status` | A space-separated list of sites to get worker functions for. |
 | `CUSTOM_WORKER_FUCTIONS` | String of functions for a custom worker | formated as such: "-f function1 -f function2". Defaults to "-f default"   |
 
-## Custom Worker
-
-This is currently on compatible with upstart
-
-Copy `upstart/gearman-custom-worker.conf` files into `/etc/init`.
-
-Add your custom working functions to `/etc/default/gearman-workers` in the following format:
-```
-CUSTOM_WORKER_FUCTIONS="-f function1 -f function2 -f function3"
-```
-
-Ensure total number of workers does not exceed total number of CPU cores. May have to configure the `CPU_COUNT` var as well.
-
-stop gearman-workers
-start gearman-workers
-
-Your Custom worker should start with all the others.
-
 ## upstart
 
 Copy the `upstart/gearman-workers.conf` and `upstart/gearman-worker.conf` files into `/etc/init`.
@@ -100,6 +82,101 @@ systemctl stop gearman-workers.target
 ```
 
 Most options in the /etc/default/gearman-workers file has to be set, specially the path to binary ones as these are not available to the system at boot time.
+
+## Custom Worker
+(optional)
+
+### Add custom function
+
+Add your custom working functions to `/etc/default/gearman-workers` in the following format:
+```
+CUSTOM_WORKER_FUCTIONS="-f function1 -f function2 -f function3"
+```
+
+Ensure total number of workers does not exceed total number of CPU cores. May have to configure the `CPU_COUNT` var as well.
+
+### systemd
+
+Stop workers as we are going to edit the gearman-workers.target file.
+
+```
+systemctl stop gearm-workers.target
+```
+
+Create custom workers service file.
+
+```
+cat <<EOT >/etc/systemd/system/gearman-custom-worker@.service
+#gearman-worker jobs process, requires gearmand - DGI
+[Unit]
+Description=Gearman Custom Worker %i
+Requires=gearman-job-server.service
+PartOf=gearman-workers.target
+
+[Service]
+Environment=OMP_THREAD_LIMIT=1
+WorkingDirectory=/opt/gearman-init
+User=www-data
+ExecStart=/opt/gearman-init/gearman-custom-worker.sh %i
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+EOT
+```
+
+Edit `/etc/systemd/system/gearman-workers.target` to reflect that you now need to start custom workers.
+eg.
+
+```
+[Unit]
+Description=Gearman Workers
+Requires=gearman-worker@1.service
+Requires=gearman-custom-worker@1.service
+Requires=gearman-custom-worker@2.service
+```
+
+#### Enable on boot
+
+Just like the standard workers above, we have to enable or disable what we want to start with systemctl
+
+```
+systemctl enable Requires=gearman-custom-worker@{1..2}.service
+```
+
+Start your workers
+
+```
+systemctl start gearman-workers.taget
+```
+
+### Upstart
+
+Copy `upstart/gearman-custom-worker.conf` files into `/etc/init`.
+
+```
+stop gearman-workers
+start gearman-workers
+```
+
+Your Custom worker should start with all the others.
+
+
+## Check workers
+
+Check that the workers are configured as you like with `gearadmin --status`
+
+```
+root@ingest:~# gearadmin --st
+is3b-ro	0	0	1
+ijj-d	0	0	3
+is3b-do	0	0	1
+is3b-rc	0	0	1
+is3b-bc	0	0	1
+is3b-bo	0	0	1
+is3b-dc	0	0	1
+.
+```
 
 ## Note
 
