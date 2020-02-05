@@ -2,6 +2,7 @@
 [Unit]
 Description=Gearman Worker %i
 After=gearman-job-server.service
+Requires=gearman-job-server.service
 PartOf=gearman-workers.target
 
 [Service]
