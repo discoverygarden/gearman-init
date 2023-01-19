@@ -3,3 +3,4 @@
 [Unit]
 After=mysql.service
 Requires=mysql.service
+PartOf=mysql.service

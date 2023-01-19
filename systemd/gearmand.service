@@ -3,3 +3,4 @@
 [Unit]
 After=mariadb.service
 Requires=mariadb.service
+PartOf=mariadb.service
