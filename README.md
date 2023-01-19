@@ -67,6 +67,12 @@ To start the workers immediately:
 
 Copy `systemd/*` files into /etc/systemd/system you may have to modify the `After=` in `gearmand.service` depending on how split out the stack is. 
 
+### Mysql on a different server
+
+The portopen@.service file can be used to wait for mysql to be started on a different server before gearmand is started, copy the file to /etc/systemd/system and run `systemctl enable portopen@localhost.service` replace localhost with the hostname of your mysql server.
+
+Update the gearmand service file After= Requires= PartOf= to be the same as `portopen@localhost.service` that was enabled.
+
 ### Enable on boot
 where `n` is the total number of `Requires=` added to the `gearman-workers.target`
 
