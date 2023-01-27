@@ -1,0 +1,12 @@
+[Unit]
+Description=Checks port on %I
+After=network.target
+Requires=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/opt/gearman-init/check_port.sh -h %I
+
+[Install]
+WantedBy=default.target
