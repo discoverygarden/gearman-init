@@ -65,7 +65,7 @@ To start the workers immediately:
 ```
 ## systemd
 
-Copy `systemd/*` files into /etc/systemd/system you may have to modify the `After=` in `gearmand.service` depending on how split out the stack is. 
+Copy `systemd/` files into `/etc/systemd/system`.  Note Ubuntu uses `gearman-job-server`, whereas RHEL uses `gearmand`.  You may have to modify the `After=` and `Requires=` in the service files depending on how split out the stack is.  For example, does the daemon/server live on the same VM as mysql/maria, and does the worker live on the same VM as the daemon/server?
 
 ### Mysql on a different server
 
